@@ -2,3 +2,197 @@
 <h1>Git Learning for a local repository.</h1>
 <h1>Its added in feature1 branch.(dropdown)</h1>
 <h1>Its added in feature1 branch.(button)king</h1>
+chest sheet link 
+https://drive.google.com/drive/folders/1DVyeI_e6qlIQKbbWhXb3lr5HNL22CaFN
+
+//  git important commands
+## Git Cheat Sheet
+
+### Setup
+
+```bash
+git config --global user.name "Your Name"
+git config --global user.email "you@example.com"
+
+git config --list
+```
+
+### Create or copy a repository
+
+```bash
+git init
+git clone <repository-url>
+```
+
+### Check status and history
+
+```bash
+git status
+git log
+git log --oneline
+git diff
+git diff --staged
+```
+
+### Stage and commit
+
+```bash
+git add <file>
+git add .
+git restore <file>              # discard unstaged changes
+git restore --staged <file>     # unstage a file
+
+git commit -m "Your message"
+git commit --amend               # edit the latest commit
+```
+
+### Branches
+
+```bash
+git branch                      # list local branches
+git branch -a                   # list local and remote branches
+git switch -c feature1          # create and switch branch
+git switch feature1             # switch branch
+git branch -d feature1          # delete merged branch
+```
+
+Older equivalent:
+
+```bash
+git checkout -b feature1
+git checkout feature1
+```
+
+### Remote repositories
+
+```bash
+git remote -v
+git remote add origin <repository-url>
+git remote remove origin
+git fetch origin
+```
+
+### Push and pull
+
+```bash
+git push origin main
+git push -u origin feature1    # first push; sets upstream
+git push                        # future push
+
+git pull origin main
+git pull --rebase origin main
+```
+
+- `pull` downloads and merges remote changes.
+- `pull --rebase` downloads changes and places your commits after them.
+
+### Merge branches
+
+```bash
+git switch main
+git merge feature1
+```
+
+If conflicts occur:
+
+```bash
+git status
+# edit the conflicting files
+git add <file>
+git commit
+```
+
+Cancel a merge:
+
+```bash
+git merge --abort
+```
+
+### Rebase
+
+```bash
+git switch feature1
+git rebase main
+```
+
+During a conflict:
+
+```bash
+git status
+# edit files
+git add <file>
+git rebase --continue
+```
+
+Cancel a rebase:
+
+```bash
+git rebase --abort
+```
+
+### Undo changes
+
+```bash
+git restore <file>                 # discard uncommitted file changes
+git reset HEAD <file>              # unstage file
+git reset --soft HEAD~1             # undo commit, keep staged changes
+git reset --mixed HEAD~1            # undo commit, keep changes unstaged
+git reset --hard HEAD~1             # undo commit and delete changes
+```
+
+Be careful with `--hard`.
+
+### Undo a pushed commit safely
+
+```bash
+git revert <commit-hash>
+git push
+```
+
+`revert` creates a new commit that reverses the old one.
+
+### View commit details
+
+```bash
+git show <commit-hash>
+git log --oneline --graph --all
+git log --author="Name"
+```
+
+### Clean untracked files
+
+Preview first:
+
+```bash
+git clean -n
+```
+
+Delete untracked files:
+
+```bash
+git clean -fd
+```
+
+### Tags
+
+```bash
+git tag v1.0
+git tag
+git push origin v1.0
+```
+
+### Common GitHub workflow
+
+```bash
+git switch main
+git pull --rebase origin main
+git switch -c feature1
+
+# edit files
+git add .
+git commit -m "Add feature"
+
+git push -u origin feature1
+```
+
+Then create a pull request on GitHub.
